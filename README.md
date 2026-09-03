@@ -9,3 +9,8 @@
   ```shell
   node server.js
   ```
+
+  2. 정적 파일(html, css, js) 서버
+  - server .js
+    - server = http.createServer()
+    - server.listen()
