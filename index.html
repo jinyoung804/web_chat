@@ -4,9 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>web chat</title>
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    Hello, world!
+    <div id="app">
+      <header>
+        <h1>실시간 웹챗</h1>
+      </header>
+      <ul id="messages"></ul>
+      <form action="" id="chat-form">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="메시지를 입력하세요."
+          autocomplete="off"
+        /><button type="submit">보내기</button>
+      </form>
+    </div>
+    <script src="client.js"></script>
   </body>
 </html>

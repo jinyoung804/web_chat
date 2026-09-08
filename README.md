@@ -6,6 +6,7 @@
   - Codex 확장 기능
 - Git
 - Node.js
+
   ```shell
   node server.js
   ```
@@ -14,3 +15,14 @@
   - server .js
     - server = http.createServer()
     - server.listen()
+  - index.html
+    - #app
+      - header
+      - ul#messages
+      - form#chat-input
+      - button
+  - reset.css
+    - -
+    - ul
+  - style.css
+  - client.js
