@@ -1,11 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&display=swap");
 
 :root {
-  --ios-blue: #0b84ff;
-  --ios-gray: #e9e9eb;
-  --ios-text: #000;
-  --ios-muted: #8e8e93;
-  --ios-line: #d1d1d6;
+  --text: #171717;
+  --muted: #96999f;
+  --line: #dddddf;
 }
 
 * {
@@ -23,13 +21,13 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  background: #fff;
-  color: var(--ios-text);
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Noto Sans KR", sans-serif;
+  background: #f0f1f3;
+  color: var(--text);
+  font-family: "Noto Sans KR", Arial, sans-serif;
 }
 
 #app {
+  position: relative;
   min-height: 100vh;
   flex: 1;
   display: flex;
@@ -38,216 +36,285 @@ body {
   background: #fff;
 }
 
-/* 상단 프로필 영역 */
+/* 상단 채팅방 */
 header {
   position: relative;
-  min-height: 110px;
-  padding: 18px 50px 12px;
+  min-height: 88px;
+  padding: 17px 54px 13px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  border-bottom: 1px solid var(--ios-line);
-  background: rgba(248, 248, 248, 0.92);
-  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #dedede;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(245, 246, 247, 0.96)
+  );
 }
 
-/* 뒤로가기 버튼 */
+/* 뒤로가기 */
 header::before {
   position: absolute;
-  top: 22px;
-  left: 18px;
+  top: 23px;
+  left: 17px;
   content: "‹";
-  color: var(--ios-blue);
-  font-size: 48px;
+  color: #777b80;
+  font-size: 44px;
   font-weight: 300;
   line-height: 1;
 }
 
-/* 기본 프로필 이미지 */
+/* 원형 프로필 */
 header::after {
   position: absolute;
-  top: 12px;
+  top: 9px;
   left: 50%;
-  width: 54px;
-  height: 54px;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #aeb1b5;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 35%, #fff 0 20%, transparent 21%),
-    radial-gradient(ellipse at 50% 85%, #fff 0 32%, transparent 33%),
-    linear-gradient(145deg, #aeb4bf, #7d8491);
+    radial-gradient(circle at 50% 36%, #fff 0 17%, transparent 18%),
+    radial-gradient(ellipse at 50% 82%, #fff 0 30%, transparent 31%),
+    linear-gradient(145deg, #b7bbc1, #868b93);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.75),
+    0 1px 2px rgba(0, 0, 0, 0.18);
   content: "";
   transform: translateX(-50%);
 }
 
 h1 {
   margin: 0;
+  color: #55585c;
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
-/* 메시지 영역 */
+/* 채팅 내용 영역 */
 #messages {
-  min-height: 0;
+  min-height: 420px;
   flex: 1;
   margin: 0;
-  padding: 22px 14px 18px;
+  padding: 24px 17px;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 13px;
   overflow-y: auto;
   list-style: none;
   background: #fff;
-  scrollbar-width: none;
-}
-
-#messages::-webkit-scrollbar {
-  display: none;
+  scrollbar-width: thin;
+  scrollbar-color: #aaa transparent;
 }
 
 #messages:empty::before {
   margin: auto;
-  color: var(--ios-muted);
+  color: var(--muted);
   content: "메시지가 없습니다.";
   font-size: 14px;
 }
 
-/* 받은 메시지 */
+/* 공통 말풍선 */
 #messages li {
   position: relative;
+  z-index: 1;
+  width: fit-content;
   max-width: 76%;
   align-self: flex-start;
-  padding: 9px 14px;
-  border-radius: 19px;
-  background: var(--ios-gray);
-  color: #000;
+  padding: 9px 14px 10px;
+  border: 1px solid rgba(145, 145, 145, 0.78);
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f5f5f5 32%,
+    #e5e5e5 72%,
+    #d8d8d8 100%
+  );
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 3px rgba(90, 90, 90, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.16);
+  color: #181818;
   font-size: 15px;
   font-weight: 400;
-  line-height: 1.35;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
   overflow-wrap: anywhere;
 }
 
-/* 받은 메시지 말풍선 꼬리 */
+/* 받은 메시지 유리광 */
 #messages li::before {
   position: absolute;
-  bottom: 0;
-  left: -6px;
-  width: 15px;
-  height: 16px;
-  border-bottom-right-radius: 13px;
-  background: var(--ios-gray);
+  top: 2px;
+  right: 10px;
+  left: 10px;
+  height: 42%;
+  border-radius: 15px 15px 9px 9px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.15)
+  );
   content: "";
+  pointer-events: none;
 }
 
+/* 받은 메시지 왼쪽 꼬리 */
 #messages li::after {
   position: absolute;
-  bottom: 0;
-  left: -10px;
-  width: 10px;
-  height: 18px;
-  border-bottom-right-radius: 10px;
-  background: #fff;
+  bottom: -1px;
+  left: -6px;
+  z-index: -1;
+  width: 15px;
+  height: 17px;
+  border-bottom: 1px solid rgba(145, 145, 145, 0.78);
+  border-left: 1px solid rgba(145, 145, 145, 0.78);
+  border-bottom-left-radius: 12px;
+  background: linear-gradient(145deg, #eeeeee, #d8d8d8);
   content: "";
+  transform: skewX(-24deg);
+  transform-origin: bottom right;
 }
 
 /* 보낸 메시지 */
 #messages li:nth-child(even) {
   align-self: flex-end;
-  background: var(--ios-blue);
-  color: #fff;
+  border-color: rgba(91, 145, 39, 0.78);
+  background: linear-gradient(
+    180deg,
+    rgba(229, 255, 191, 0.98) 0%,
+    rgba(195, 242, 125, 0.98) 32%,
+    rgba(159, 220, 75, 0.98) 70%,
+    rgba(130, 199, 51, 0.98) 100%
+  );
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.85),
+    inset 0 -2px 3px rgba(65, 125, 15, 0.17),
+    0 2px 4px rgba(54, 92, 24, 0.24);
+  color: #172111;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.42);
 }
 
-/* 보낸 메시지 말풍선 꼬리 */
+/* 보낸 메시지 유리광 */
 #messages li:nth-child(even)::before {
+  right: 10px;
+  left: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.63),
+    rgba(255, 255, 255, 0.06)
+  );
+}
+
+/* 보낸 메시지 오른쪽 꼬리 */
+#messages li:nth-child(even)::after {
   right: -6px;
   left: auto;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 13px;
-  background: var(--ios-blue);
+  border: 0;
+  border-right: 1px solid rgba(91, 145, 39, 0.78);
+  border-bottom: 1px solid rgba(91, 145, 39, 0.78);
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(168, 228, 88, 0.98),
+    rgba(125, 195, 48, 0.98)
+  );
+  transform: skewX(24deg);
+  transform-origin: bottom left;
 }
 
-#messages li:nth-child(even)::after {
-  right: -10px;
-  left: auto;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 10px;
-  background: #fff;
-}
-
-/* 메시지 입력 영역 */
+/* 입력창 영역 */
 #chat-form {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  border-top: 1px solid #ededed;
-  background: rgba(250, 250, 250, 0.95);
-  backdrop-filter: blur(20px);
+  border-top: 1px solid #dadbdd;
+  background: linear-gradient(180deg, #f8f8f8, #e9eaec);
 }
 
+/* 메시지 입력창 */
 #chat-input {
   min-width: 0;
-  height: 38px;
+  height: 40px;
   flex: 1;
-  padding: 0 14px;
-  border: 1px solid #c7c7cc;
+  padding: 0 15px;
+  border: 1px solid #b5b7bb;
   border-radius: 20px;
   outline: none;
-  background: #fff;
-  color: #000;
-  font: inherit;
-  font-size: 15px;
+  background: linear-gradient(180deg, #ffffff, #f3f3f3);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.9);
+  color: #181818;
+  font-family: inherit;
+  font-size: 14px;
 }
 
 #chat-input::placeholder {
-  color: #a7a7ac;
+  color: #a0a2a6;
 }
 
 #chat-input:focus {
-  border-color: #a7a7ac;
+  border-color: #8ebd4e;
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.08),
+    0 0 0 3px rgba(151, 210, 77, 0.17);
 }
 
 /* 전송 버튼 */
 #chat-form button {
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  flex: none;
-  border: 0;
-  border-radius: 50%;
-  background: var(--ios-blue);
-  color: transparent;
+  height: 40px;
+  padding: 0 17px;
+  border: 1px solid #668f30;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #c8ef91, #83c63e);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.65),
+    0 1px 2px rgba(0, 0, 0, 0.17);
+  color: #203415;
   cursor: pointer;
-  font-size: 0;
-}
-
-/* 위쪽 화살표 */
-#chat-form button::before {
-  content: "↑";
-  color: #fff;
-  font-size: 24px;
+  font-family: inherit;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 38px;
+  white-space: nowrap;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.45);
 }
 
 #chat-form button:hover {
-  background: #0075e8;
+  background: linear-gradient(180deg, #d4f5a6, #8fd047);
 }
 
 #chat-form button:active {
-  transform: scale(0.94);
+  background: linear-gradient(180deg, #7dbb3b, #aadc65);
+  transform: translateY(1px);
 }
 
+/* PC에서 휴대폰처럼 표시 */
 @media (min-width: 431px) {
   body {
     padding: 24px 0;
-    background: #eef0f5;
   }
 
   #app {
     min-height: calc(100vh - 48px);
-    border: 1px solid #d8d8dc;
-    border-radius: 28px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    border: 1px solid #cfd1d4;
+    border-radius: 24px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* 모바일 */
+@media (max-width: 430px) {
+  body {
+    width: 100%;
+    background: #fff;
+  }
+
+  #app {
+    min-height: 100vh;
   }
 }
