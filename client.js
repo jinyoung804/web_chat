@@ -9,13 +9,23 @@ function addMessage(message) {
 }
 
 chatForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+  event.preventDefault(); //화면 깜빡거리는 기본동작 막기
 
-  const message = chatInput.value.trim();
-  if (!message) return;
+  const message = chatInput.value.trim(); //앞 뒤 여백 자르기
+  if (!message) return; // 메세지 빈칸이면 return
 
   addMessage(message);
-
   chatInput.value = "";
   chatInput.focus();
 });
+
+//-------------Welcome WebSocket World ------------------
+const ws = new WebSocket(`ws://${location.host}`);
+
+//ws.on("open", () => {});
+ws.onopen = () => {
+  console.log("서버 연결");
+};
+ws.onclose = () => {
+  console.log("서버 연결 해제");
+};
