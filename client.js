@@ -13,8 +13,8 @@ chatForm.addEventListener("submit", (event) => {
 
   const message = chatInput.value.trim(); //앞 뒤 여백 자르기
   if (!message) return; // 메세지 빈칸이면 return
-
-  ws.send(message); //서버로 message 날리자
+  //서버로 message를 날리자
+  ws.send(JSON.stringify({ type: "chat", text: message })); //json->string
 
   addMessage(message);
   chatInput.value = "";

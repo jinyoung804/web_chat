@@ -38,6 +38,6 @@
      - ws.on("close", () => {});
    - client.js
      - chatForm.addEventListener("submit", ...)
-     - ws.send(text);
+     - ws.send({type: "message", text}); //json->string
      - ws.onopen = () => {};
      - ws.onclose = () => {};
