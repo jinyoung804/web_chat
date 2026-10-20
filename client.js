@@ -28,6 +28,17 @@ const ws = new WebSocket(`ws://${location.host}`);
 ws.onopen = () => {
   console.log("서버 연결");
 };
+ws.onmessage = (event) => {
+  //string -> json
+  const data = event.data;
+  const json = JSON.parse(data);
+  //type: chat -> 채팅창에 대화로 추가(li)
+  switch (json.type) {
+    case "chat":
+      console.log(json.text);
+      break;
+  }
+};
 ws.onclose = () => {
   console.log("서버 연결 해제");
 };
