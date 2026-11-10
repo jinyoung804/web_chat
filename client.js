@@ -1,41 +1,47 @@
-const chatForm = document.getElementById("chat-form");
-const chatInput = document.getElementById("chat-input");
-const messages = document.getElementById("messages");
+const messageList = document.querySelector("#messages");
+const chatForm = document.querySelector("#chat-form");
+const chatInput = document.querySelector("#chat-input");
 
-function addMessage(message) {
+function addMessage(senderNickname, message) {
   const li = document.createElement("li");
-  li.textContent = message;
-  messages.appendChild(li);
+  li.textContent = senderNickname + ":" + message;
+  messageList.appendChild(li);
 }
 
 chatForm.addEventListener("submit", (event) => {
-  event.preventDefault(); //화면 깜빡거리는 기본동작 막기
+  event.preventDefault(); // 화면 깜빡거리는 기본동작 막기
 
-  const message = chatInput.value.trim(); //앞 뒤 여백 자르기
-  if (!message) return; // 메세지 빈칸이면 return
-  //서버로 message를 날리자
-  ws.send(JSON.stringify({ type: "chat", text: message })); //json->string
+  const message = chatInput.value.trim(); // 앞 뒤 여백 자르기
 
-  addMessage(message);
+  if (!message) return; // 메시지 빈칸이면 return
+
+  // ws.send(message); // 서버로 message 날리자
+  ws.send(JSON.stringify({ type: "chat", text: message })); // json -> string
+  // addMessage(message);
+
   chatInput.value = "";
   chatInput.focus();
 });
-
-//-------------Welcome WebSocket World ------------------
+// ----------- Welcome WebSocketSever World -----------
 const ws = new WebSocket(`ws://${location.host}`);
-
-//ws.on("open", () => {});
+const nickname = prompt("당신의 닉네임을 입력하세요.").trim() || "익명";
+// ws.on("open", () => {});
 ws.onopen = () => {
   console.log("서버 연결");
+  ws.send(JSON.stringify({ type: "join", text: nickname })); //server에 nickname 보내기
 };
 ws.onmessage = (event) => {
-  //string -> json
+  // string -> json
   const data = event.data;
   const json = JSON.parse(data);
-  //type: chat -> 채팅창에 대화로 추가(li)
+
+  // type : chat -> 채팅창에 대화로 추가(li)
   switch (json.type) {
     case "chat":
-      console.log(json.text);
+      // console.log(json.text);
+      // 화면에 json.text를 보여주기
+      console.log(json.nickname);
+      addMessage(json.nickname, json.text);
       break;
   }
 };
