@@ -161,6 +161,15 @@ h1 {
   pointer-events: none;
 }
 
+#messages .nickname {
+  position: relative;
+  display: block;
+  margin-bottom: 4px;
+  font: inherit;
+  font-size: 12px;
+  color: inherit;
+}
+
 /* 받은 메시지 왼쪽 꼬리 */
 #messages li::after {
   position: absolute;
@@ -179,7 +188,7 @@ h1 {
 }
 
 /* 보낸 메시지 */
-#messages li:nth-child(even) {
+#messages li.my-message {
   align-self: flex-end;
   border-color: rgba(91, 145, 39, 0.78);
   background: linear-gradient(
@@ -198,7 +207,7 @@ h1 {
 }
 
 /* 보낸 메시지 유리광 */
-#messages li:nth-child(even)::before {
+#messages li.my-message::before {
   right: 10px;
   left: 10px;
   background: linear-gradient(
@@ -209,7 +218,7 @@ h1 {
 }
 
 /* 보낸 메시지 오른쪽 꼬리 */
-#messages li:nth-child(even)::after {
+#messages li.my-message::after {
   right: -6px;
   left: auto;
   border: 0;
@@ -317,4 +326,30 @@ h1 {
   #app {
     min-height: 100vh;
   }
+}
+
+/* 상대 메시지 시간: 말풍선 오른쪽 */
+#messages .message-time {
+  position: absolute;
+  right: -7px;
+  bottom: 0;
+  transform: translateX(100%);
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: normal;
+  text-shadow: none;
+  white-space: nowrap;
+}
+
+/* 내 메시지 시간: 말풍선 왼쪽 */
+#messages .my-message .message-time {
+  right: auto;
+  left: -7px;
+  transform: translateX(-100%);
+}
+/* 내가 보낸 메시지의 닉네임 숨기기 */
+#messages li.my-message .nickname {
+  display: none;
 }
